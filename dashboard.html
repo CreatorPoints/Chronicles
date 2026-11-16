@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gametale &mdash; Participant Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@500;700&family=Gaegu:wght@400;700&family=Sniglet:wght@400;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <a href="/" class="brand-link">
+          <span class="brand-title">Gametale</span>
+        </a>
+        <span class="brand-sep" aria-hidden="true">/</span>
+        <span class="crumb">Dashboard</span>
+        <span class="brand-sep" aria-hidden="true">|</span>
+        <a href="https://hackclub.com/" target="_blank" rel="noopener noreferrer" class="hackclub-link" aria-label="Hack Club">
+          <img src="assets/hackclub-flag.svg" alt="Hack Club" class="hackclub-flag">
+        </a>
+      </div>
+      <nav class="top-bar-right" aria-label="Dashboard navigation">
+        <a href="https://hackclub.slack.com/archives/C0C4B8ZLPAB" target="_blank" rel="noopener noreferrer">#gametale</a>
+        <span class="nav-sep" aria-hidden="true">|</span>
+        <a href="/" class="nav-link">Home</a>
+        <span class="nav-sep" aria-hidden="true">|</span>
+        <a id="authActionLink" href="https://gametale-vault.hackclub.app/auth/login" class="nav-link nav-auth">Log In</a>
+      </nav>
+    </header>
+
+    <main class="dashboard-shell">
+      <section class="banner-card">
+        <div class="banner-content">
+          <div class="banner-title-row">
+            <h1 id="userGreeting">Welcome, Adventurer!</h1>
+            <div class="status-badges" id="statusBadges">
+              <span class="badge badge-neutral" id="authBadge">Checking Session...</span>
+            </div>
+          </div>
+          <p class="banner-sub">Your journey to the village is inscribed here. Craft your narrative game, ship it, and claim your frames.</p>
+        </div>
+      </section>
+
+      <section class="metrics-grid">
+        <article class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Frames Balance</span>
+            <span class="metric-icon" aria-hidden="true">&#127912;</span>
+          </div>
+          <div class="metric-value" id="framesValue">0</div>
+          <div class="metric-note">10 Frames = $1 | Earned on approval</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Tale Status</span>
+            <span class="metric-icon" aria-hidden="true">&#128220;</span>
+          </div>
+          <div class="metric-value status-draft" id="taleStatusValue">Drafting</div>
+          <div class="metric-note">Target: March 17, 2027</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Livestream Pass</span>
+            <span class="metric-icon" aria-hidden="true">&#127915;</span>
+          </div>
+          <div class="metric-value status-locked" id="livestreamPassValue">Locked</div>
+          <div class="metric-note">Unlocked upon game approval</div>
+        </article>
+      </section>
+
+      <div class="dashboard-columns">
+        <section class="panel-card project-panel">
+          <div class="panel-header">
+            <h2>Your Narrative Game</h2>
+            <span class="panel-pill" id="projectPill">Draft</span>
+          </div>
+
+          <form id="projectForm" class="project-form">
+            <div class="form-group">
+              <label for="projectTitle">Game Title</label>
+              <input type="text" id="projectTitle" placeholder="e.g. Echoes of the Shore" maxlength="120" required>
+            </div>
+
+            <div class="form-group">
+              <label for="projectSynopsis">Story Synopsis</label>
+              <textarea id="projectSynopsis" rows="4" placeholder="Describe the journey, characters, and narrative choices..." maxlength="1000" required></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group form-half">
+                <label for="projectDemoUrl">Playable Demo URL</label>
+                <input type="url" id="projectDemoUrl" placeholder="https://yourname.itch.io/game" maxlength="300">
+              </div>
+              <div class="form-group form-half">
+                <label for="projectRepoUrl">Code Repository URL</label>
+                <input type="url" id="projectRepoUrl" placeholder="https://github.com/username/game" maxlength="300">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="saveDraftBtn">Save Draft</button>
+              <button type="button" class="btn btn-secondary" id="submitProjectBtn">Submit for Review</button>
+            </div>
+
+            <div class="form-feedback" id="formFeedback" role="status" aria-live="polite"></div>
+          </form>
+        </section>
+
+        <aside class="dashboard-sidebar">
+          <section class="panel-card sidebar-card">
+            <h2>Storyteller's Laws</h2>
+            <ul class="rule-checklist">
+              <li>
+                <span class="rule-icon" aria-hidden="true">&#10003;</span>
+                <div class="rule-text">
+                  <strong>Original Story &amp; Art</strong>
+                  <p>No AI generated assets (art, music, or story).</p>
+                </div>
+              </li>
+              <li>
+                <span class="rule-icon" aria-hidden="true">&#10003;</span>
+                <div class="rule-text">
+                  <strong>Capped AI Coding</strong>
+                  <p>AI assistance strictly &lt;30% for code assistance/debugging only.</p>
+                </div>
+              </li>
+              <li>
+                <span class="rule-icon" aria-hidden="true">&#10003;</span>
+                <div class="rule-text">
+                  <strong>Authentic Narrative</strong>
+                  <p>Must be a genuine story-driven game with custom animations.</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <section class="panel-card sidebar-card">
+            <h2>Village Shop</h2>
+            <p class="sidebar-intro">Spend your earned Frames when your tale is approved:</p>
+            <div class="shop-grid">
+              <div class="shop-item">
+                <div class="shop-item-icon" aria-hidden="true">&#127918;</div>
+                <div class="shop-item-info">
+                  <strong>$100 Steam Grant</strong>
+                  <span>Publish your game on Steam</span>
+                </div>
+              </div>
+              <div class="shop-item">
+                <div class="shop-item-icon" aria-hidden="true">&#127873;</div>
+                <div class="shop-item-info">
+                  <strong>$5 Steam Gift Card</strong>
+                  <span>Stock your library</span>
+                </div>
+              </div>
+              <div class="shop-item">
+                <div class="shop-item-icon" aria-hidden="true">&#9999;</div>
+                <div class="shop-item-info">
+                  <strong>Drawing Tablet Grant</strong>
+                  <span>Illustrate richer tales</span>
+                </div>
+              </div>
+              <div class="shop-item">
+                <div class="shop-item-icon" aria-hidden="true">&#11088;</div>
+                <div class="shop-item-info">
+                  <strong>Custom Stickers</strong>
+                  <span>Physical commemorative stickers</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="dashboard-footer">
+      <p>Gametale &mdash; An Official Hack Club YSWS Program</p>
+    </footer>
+
+    <script src="js/dashboard.js" defer></script>
+  </body>
+</html>
