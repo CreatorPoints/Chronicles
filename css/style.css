@@ -372,6 +372,52 @@ section.is-visible .cta-header {
   user-select: none;
 }
 
+.audio-toggle-btn {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 235, 59, 0.4);
+  color: #ffeb3b;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Gaegu', cursive;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  user-select: none;
+}
+
+.audio-toggle-btn:hover {
+  background: rgba(255, 235, 59, 0.15);
+  border-color: #ffeb3b;
+  transform: translateY(-1px);
+}
+
+.audio-toggle-btn:active {
+  transform: translateY(1px);
+}
+
+.audio-toggle-btn .audio-icon-muted {
+  display: none;
+}
+
+.audio-toggle-btn.is-muted {
+  color: #94a3b8;
+  border-color: rgba(148, 163, 184, 0.4);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.audio-toggle-btn.is-muted .audio-icon-unmuted {
+  display: none;
+}
+
+.audio-toggle-btn.is-muted .audio-icon-muted {
+  display: inline-block;
+}
+
 .faq-box {
   cursor: pointer;
   position: relative;

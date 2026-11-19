@@ -29,7 +29,61 @@ audioGulls.volume = 0;
 audioForest.volume = 0;
 audioFifth.volume = 0;
 
+const audioToggleBtn = document.getElementById('audioToggleBtn');
+const audioToggleText = document.getElementById('audioToggleText');
+let isMuted = false;
+const allAudios = [audioShore, audioGulls, audioForest, audioFifth];
+
+try {
+  if (localStorage.getItem('gametale_muted') === '1') {
+    isMuted = true;
+  }
+} catch {}
+
+const setMuted = (muted) => {
+  isMuted = muted;
+  try {
+    localStorage.setItem('gametale_muted', isMuted ? '1' : '0');
+  } catch {}
+
+  if (audioToggleBtn) {
+    audioToggleBtn.classList.toggle('is-muted', isMuted);
+    audioToggleBtn.setAttribute('aria-label', isMuted ? 'Unmute ambient audio' : 'Mute ambient audio');
+  }
+  if (audioToggleText) {
+    audioToggleText.textContent = isMuted ? 'Unmute' : 'Mute';
+  }
+
+  if (isMuted) {
+    allAudios.forEach((audio) => {
+      audio._fadeToken = Symbol();
+      audio.volume = 0;
+      audio.pause();
+    });
+  } else {
+    currentAudioGroup = null;
+    updateAudioForScene(currentIndex);
+  }
+};
+
+if (audioToggleBtn) {
+  if (isMuted) {
+    audioToggleBtn.classList.add('is-muted');
+    audioToggleBtn.setAttribute('aria-label', 'Unmute ambient audio');
+    if (audioToggleText) {
+      audioToggleText.textContent = 'Unmute';
+    }
+  }
+  audioToggleBtn.addEventListener('click', () => {
+    hasUserInteracted = true;
+    setMuted(!isMuted);
+  });
+}
+
 const fadeAudio = (audio, targetVol, fadeDuration = 1200) => {
+  if (isMuted && targetVol > 0) {
+    return;
+  }
   const fadeToken = Symbol();
   audio._fadeToken = fadeToken;
 
@@ -75,6 +129,10 @@ const updateAudioForScene = (sceneIndex) => {
     return;
   }
   currentAudioGroup = targetGroup;
+
+  if (isMuted) {
+    return;
+  }
 
   if (targetGroup === 'shore') {
     fadeAudio(audioForest, 0);
@@ -267,6 +325,12 @@ window.addEventListener('keydown', (event) => {
   }
 
   if (['input', 'textarea', 'select'].includes(event.target.tagName?.toLowerCase())) {
+    return;
+  }
+
+  if (event.key === 'm' || event.key === 'M') {
+    hasUserInteracted = true;
+    setMuted(!isMuted);
     return;
   }
 
