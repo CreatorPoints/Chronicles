@@ -6,6 +6,10 @@ secret.txt
 *.key
 *.pem
 credentials*
+*.db*
+*.sqlite*
+backend*/
+backup*/
 
 # System & Editor files
 .DS_Store
