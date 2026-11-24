@@ -109,30 +109,30 @@ section.is-visible .floating-flank {
 }
 
 .flank-left {
-  right: calc(100% + 24px);
+  right: calc(100% + 32px);
   align-items: flex-end;
 }
 
 .flank-right {
-  left: calc(100% + 24px);
+  left: calc(100% + 32px);
   align-items: flex-start;
 }
 
 .floating-card {
   background: rgba(11, 25, 44, 0.75);
   border: 1.5px solid rgba(255, 235, 59, 0.3);
-  border-radius: 16px;
-  padding: 10px 8px;
+  border-radius: 20px;
+  padding: 12px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 235, 59, 0.04);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  width: 104px;
-  height: 98px;
+  width: 140px;
+  height: 128px;
   text-align: center;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, box-shadow 0.2s ease;
   user-select: none;
@@ -156,8 +156,8 @@ section.is-visible .floating-flank {
 .card-item-8 { transform: rotate(-13deg) translateX(-12px); }
 
 .floating-card-img-wrap {
-  width: 46px;
-  height: 46px;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,7 +173,7 @@ section.is-visible .floating-flank {
 
 .floating-card-name {
   font-family: 'DynaPuff', cursive;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.25;
   color: #ffeb3b;
   max-width: 100%;
@@ -745,15 +745,16 @@ section.is-visible .cta-header {
     width: 100%;
   }
   .village-fallback-grid .floating-card {
-    height: 72px;
+    height: 84px;
     padding: 6px 4px;
+    border-radius: 14px;
   }
   .village-fallback-grid .floating-card-img-wrap {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
   }
   .village-fallback-grid .floating-card-name {
-    font-size: 10.5px;
+    font-size: 11px;
     line-height: 1.15;
   }
   .village-list {
@@ -841,15 +842,16 @@ section.is-visible .cta-header {
     gap: 5px;
   }
   .village-fallback-grid .floating-card {
-    height: 64px;
-    padding: 4px 2px;
+    height: 74px;
+    padding: 5px 3px;
+    border-radius: 12px;
   }
   .village-fallback-grid .floating-card-img-wrap {
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
   }
   .village-fallback-grid .floating-card-name {
-    font-size: 9.5px;
+    font-size: 10px;
   }
   .village-list {
     font-size: 13px;
