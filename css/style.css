@@ -184,166 +184,6 @@ section.is-visible .floating-flank {
   -webkit-box-orient: vertical;
 }
 
-@media (max-width: 1024px) {
-  .flank-left {
-    right: calc(100% + 10px);
-    transform: translateY(-50%) scale(0.85);
-  }
-  .flank-right {
-    left: calc(100% + 10px);
-    transform: translateY(-50%) scale(0.85);
-  }
-}
-
-@media (max-width: 860px) {
-  section {
-    padding: 24px 16px;
-  }
-  .content-box {
-    padding: 24px 18px;
-    max-height: calc(100vh - 80px);
-    border-radius: 18px;
-  }
-  h1 {
-    font-size: clamp(32px, 8.5vw, 48px);
-    margin-bottom: 12px;
-  }
-  h2 {
-    font-size: clamp(26px, 7vw, 40px);
-    margin-bottom: 12px;
-  }
-  p {
-    font-size: clamp(15px, 4vw, 18px);
-    line-height: 1.5;
-  }
-  .hero-nav {
-    top: 14px;
-    left: 16px;
-    right: 16px;
-  }
-  .audio-toggle-btn {
-    padding: 7px 13px;
-    font-size: 13px;
-  }
-  .floating-flank {
-    display: none !important;
-  }
-  .village-showcase {
-    flex-direction: column;
-    max-width: 100%;
-    width: 100%;
-  }
-  .village-fallback-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-top: 14px;
-    width: 100%;
-  }
-  .village-fallback-grid .floating-card {
-    height: 72px;
-    padding: 6px 4px;
-  }
-  .village-fallback-grid .floating-card-img-wrap {
-    width: 34px;
-    height: 34px;
-  }
-  .village-fallback-grid .floating-card-name {
-    font-size: 10.5px;
-    line-height: 1.15;
-  }
-  .village-list {
-    font-size: 14px;
-    line-height: 1.45;
-    padding-left: 18px;
-    gap: 6px;
-    margin: 10px 0;
-  }
-  .village-item-title {
-    font-size: 13.5px;
-  }
-  .village-footer {
-    font-size: 20px;
-    margin-top: 8px;
-  }
-  .faq-box {
-    padding: 24px 18px;
-    max-height: calc(100vh - 80px);
-    border-radius: 18px;
-  }
-  .faq-box h2 {
-    font-size: clamp(26px, 6.5vw, 36px);
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-  }
-  .faq-scroll-container {
-    max-height: calc(100vh - 160px);
-    padding-right: 6px;
-  }
-  .faq-scroll-container h3 {
-    font-size: 15.5px;
-    margin: 12px 0 4px 0;
-  }
-  .faq-scroll-container p {
-    font-size: 14px;
-    line-height: 1.45;
-    margin-bottom: 10px;
-  }
-  .hero-cta-btn {
-    font-size: 17px;
-    padding: 12px 28px;
-    margin-top: 18px;
-  }
-  .cta-header h2 {
-    font-size: clamp(28px, 7vw, 42px);
-  }
-  .cta-header p {
-    font-size: clamp(15px, 4vw, 18px);
-  }
-  .scroll-pill {
-    bottom: 12px;
-    padding: 6px 14px;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  section {
-    padding: 16px 12px;
-  }
-  .content-box {
-    padding: 20px 14px;
-    max-height: calc(100vh - 60px);
-  }
-  .faq-box {
-    padding: 20px 14px;
-    max-height: calc(100vh - 60px);
-  }
-  .faq-scroll-container {
-    max-height: calc(100vh - 140px);
-  }
-  .village-fallback-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-  }
-  .village-fallback-grid .floating-card {
-    height: 64px;
-    padding: 4px 2px;
-  }
-  .village-fallback-grid .floating-card-img-wrap {
-    width: 28px;
-    height: 28px;
-  }
-  .village-fallback-grid .floating-card-name {
-    font-size: 9.5px;
-  }
-  .village-list {
-    font-size: 13px;
-    gap: 4px;
-    margin: 8px 0;
-  }
-}
-
 .village-fallback-grid {
   display: none;
   grid-template-columns: repeat(4, 1fr);
@@ -620,20 +460,26 @@ section.is-visible .cta-header {
 .top-bar-right {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   pointer-events: auto;
+}
+
+.top-bar-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: 'Gaegu', cursive;
   font-size: 19px;
   letter-spacing: 0.02em;
 }
 
-.top-bar-right a {
+.top-bar-nav a {
   color: #e2e8f0;
   text-decoration: none;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.top-bar-right a:hover {
+.top-bar-nav a:hover {
   color: #ffeb3b;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -801,6 +647,215 @@ section.is-visible .cta-header {
 .entry-prompt.is-ready {
   opacity: 1;
   visibility: visible;
+}
+
+@media (max-width: 1024px) {
+  .flank-left {
+    right: calc(100% + 10px);
+    transform: translateY(-50%) scale(0.85);
+  }
+  .flank-right {
+    left: calc(100% + 10px);
+    transform: translateY(-50%) scale(0.85);
+  }
+}
+
+@media (max-width: 860px) {
+  section {
+    padding: 24px 16px;
+  }
+  .content-box {
+    padding: 24px 18px;
+    max-height: calc(100vh - 80px);
+    border-radius: 18px;
+  }
+  h1 {
+    font-size: clamp(32px, 8.5vw, 48px);
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: clamp(26px, 7vw, 40px);
+    margin-bottom: 12px;
+  }
+  p {
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.5;
+  }
+  .top-bar {
+    padding: 10px 14px 20px 14px;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 8px;
+  }
+  .top-bar-left {
+    order: 1;
+    gap: 8px;
+  }
+  .brand-title {
+    font-size: 18px;
+  }
+  .hackclub-flag {
+    height: 22px;
+  }
+  .top-bar-right {
+    display: contents;
+  }
+  .audio-toggle-btn {
+    order: 2;
+    padding: 5px 11px;
+    font-size: 14px;
+  }
+  .top-bar-nav {
+    order: 3;
+    width: 100%;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .top-bar-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .top-nav-sep {
+    display: none;
+  }
+  .top-bar-nav a {
+    color: #ccc;
+    font-size: 11.5px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .floating-flank {
+    display: none !important;
+  }
+  .village-showcase {
+    flex-direction: column;
+    max-width: 100%;
+    width: 100%;
+  }
+  .village-fallback-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+    width: 100%;
+  }
+  .village-fallback-grid .floating-card {
+    height: 72px;
+    padding: 6px 4px;
+  }
+  .village-fallback-grid .floating-card-img-wrap {
+    width: 34px;
+    height: 34px;
+  }
+  .village-fallback-grid .floating-card-name {
+    font-size: 10.5px;
+    line-height: 1.15;
+  }
+  .village-list {
+    font-size: 14px;
+    line-height: 1.45;
+    padding-left: 18px;
+    gap: 6px;
+    margin: 10px 0;
+  }
+  .village-item-title {
+    font-size: 13.5px;
+  }
+  .village-footer {
+    font-size: 20px;
+    margin-top: 8px;
+  }
+  .faq-box {
+    padding: 24px 18px;
+    max-height: calc(100vh - 80px);
+    border-radius: 18px;
+  }
+  .faq-box h2 {
+    font-size: clamp(26px, 6.5vw, 36px);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+  .faq-scroll-container {
+    max-height: calc(100vh - 160px);
+    padding-right: 6px;
+  }
+  .faq-scroll-container h3 {
+    font-size: 15.5px;
+    margin: 12px 0 4px 0;
+  }
+  .faq-scroll-container p {
+    font-size: 14px;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .hero-cta-btn {
+    font-size: 17px;
+    padding: 12px 28px;
+    margin-top: 18px;
+  }
+  .cta-header h2 {
+    font-size: clamp(28px, 7vw, 42px);
+  }
+  .cta-header p {
+    font-size: clamp(15px, 4vw, 18px);
+  }
+  .scroll-pill {
+    top: auto;
+    bottom: 14px;
+    right: 14px;
+    transform: none;
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+  .scroll-pill.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 16px 12px;
+  }
+  .content-box {
+    padding: 20px 14px;
+    max-height: calc(100vh - 60px);
+  }
+  .faq-box {
+    padding: 20px 14px;
+    max-height: calc(100vh - 60px);
+  }
+  .faq-scroll-container {
+    max-height: calc(100vh - 140px);
+  }
+  .village-fallback-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+  }
+  .village-fallback-grid .floating-card {
+    height: 64px;
+    padding: 4px 2px;
+  }
+  .village-fallback-grid .floating-card-img-wrap {
+    width: 28px;
+    height: 28px;
+  }
+  .village-fallback-grid .floating-card-name {
+    font-size: 9.5px;
+  }
+  .village-list {
+    font-size: 13px;
+    gap: 4px;
+    margin: 8px 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
