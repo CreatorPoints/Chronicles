@@ -31,19 +31,20 @@ audioFifth.volume = 0;
 
 const audioToggleBtn = document.getElementById('audioToggleBtn');
 const audioToggleText = document.getElementById('audioToggleText');
-let isMuted = false;
+let isMuted = true;
 const allAudios = [audioShore, audioGulls, audioForest, audioFifth];
 
 try {
-  if (localStorage.getItem('gametale_muted') === '1') {
-    isMuted = true;
+  const savedMute = localStorage.getItem('chronicles_muted') ?? localStorage.getItem('gametale_muted');
+  if (savedMute === '0') {
+    isMuted = false;
   }
 } catch {}
 
 const setMuted = (muted) => {
   isMuted = muted;
   try {
-    localStorage.setItem('gametale_muted', isMuted ? '1' : '0');
+    localStorage.setItem('chronicles_muted', isMuted ? '1' : '0');
   } catch {}
 
   if (audioToggleBtn) {
@@ -57,28 +58,79 @@ const setMuted = (muted) => {
   if (isMuted) {
     allAudios.forEach((audio) => {
       audio._fadeToken = Symbol();
+      if (audio._gainNode) {
+        audio._gainNode.gain.value = 0;
+      }
       audio.volume = 0;
       audio.pause();
     });
   } else {
+    initShoreAudioNodes();
     currentAudioGroup = null;
     updateAudioForScene(currentIndex);
   }
 };
 
 if (audioToggleBtn) {
-  if (isMuted) {
-    audioToggleBtn.classList.add('is-muted');
-    audioToggleBtn.setAttribute('aria-label', 'Unmute ambient audio');
-    if (audioToggleText) {
-      audioToggleText.textContent = 'Unmute';
-    }
+  audioToggleBtn.classList.toggle('is-muted', isMuted);
+  audioToggleBtn.setAttribute('aria-label', isMuted ? 'Unmute ambient audio' : 'Mute ambient audio');
+  if (audioToggleText) {
+    audioToggleText.textContent = isMuted ? 'Unmute' : 'Mute';
   }
   audioToggleBtn.addEventListener('click', () => {
     hasUserInteracted = true;
+    initShoreAudioNodes();
     setMuted(!isMuted);
   });
 }
+
+let audioCtx = null;
+let shorePanner = null;
+let shoreGain = null;
+
+const initShoreAudioNodes = () => {
+  if (shorePanner || shoreGain) {
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+    return;
+  }
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) {
+      return;
+    }
+    audioCtx = new AudioContextClass();
+    const source = audioCtx.createMediaElementSource(audioShore);
+    shoreGain = audioCtx.createGain();
+    shoreGain.gain.value = audioShore.volume;
+    audioShore._gainNode = shoreGain;
+
+    if (audioCtx.createStereoPanner) {
+      shorePanner = audioCtx.createStereoPanner();
+      shorePanner.pan.value = 0;
+      source.connect(shorePanner);
+      shorePanner.connect(shoreGain);
+    } else {
+      source.connect(shoreGain);
+    }
+    shoreGain.connect(audioCtx.destination);
+  } catch {}
+};
+
+const setShorePan = (targetPan, duration = 1200) => {
+  if (!shorePanner) {
+    return;
+  }
+  if (!audioCtx || audioCtx.state === 'suspended') {
+    shorePanner.pan.value = targetPan;
+    return;
+  }
+  const now = audioCtx.currentTime;
+  shorePanner.pan.cancelScheduledValues(now);
+  shorePanner.pan.setValueAtTime(shorePanner.pan.value, now);
+  shorePanner.pan.linearRampToValueAtTime(targetPan, now + duration / 1000);
+};
 
 const fadeAudio = (audio, targetVol, fadeDuration = 1200) => {
   if (isMuted && targetVol > 0) {
@@ -91,7 +143,7 @@ const fadeAudio = (audio, targetVol, fadeDuration = 1200) => {
     audio.play().catch(() => {});
   }
 
-  const startVol = audio.volume;
+  const startVol = audio._gainNode ? audio._gainNode.gain.value : audio.volume;
   const startTime = performance.now();
 
   const step = (now) => {
@@ -100,11 +152,18 @@ const fadeAudio = (audio, targetVol, fadeDuration = 1200) => {
     }
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / fadeDuration, 1);
-    audio.volume = Math.max(0, Math.min(1, startVol + (targetVol - startVol) * progress));
+    const currentVol = Math.max(0, Math.min(1, startVol + (targetVol - startVol) * progress));
+    if (audio._gainNode) {
+      audio._gainNode.gain.value = currentVol;
+    }
+    audio.volume = currentVol;
 
     if (progress < 1) {
       requestAnimationFrame(step);
     } else {
+      if (audio._gainNode) {
+        audio._gainNode.gain.value = targetVol;
+      }
       audio.volume = targetVol;
       if (targetVol === 0) {
         audio.pause();
@@ -121,6 +180,8 @@ const updateAudioForScene = (sceneIndex) => {
   let targetGroup = 'forest';
   if (sceneIndex === 0) {
     targetGroup = 'shore';
+  } else if (sceneIndex === 1) {
+    targetGroup = 'shore-forest';
   } else if (sceneIndex === 4) {
     targetGroup = 'fifth';
   }
@@ -135,10 +196,17 @@ const updateAudioForScene = (sceneIndex) => {
   }
 
   if (targetGroup === 'shore') {
+    setShorePan(0);
     fadeAudio(audioForest, 0);
     fadeAudio(audioFifth, 0);
     fadeAudio(audioShore, 0.65);
     fadeAudio(audioGulls, 0.35);
+  } else if (targetGroup === 'shore-forest') {
+    setShorePan(-1);
+    fadeAudio(audioFifth, 0);
+    fadeAudio(audioGulls, 0);
+    fadeAudio(audioShore, 0.5);
+    fadeAudio(audioForest, 0.5);
   } else if (targetGroup === 'fifth') {
     fadeAudio(audioShore, 0);
     fadeAudio(audioGulls, 0);
@@ -159,6 +227,7 @@ const initAudioOnInteraction = () => {
     return;
   }
   hasUserInteracted = true;
+  initShoreAudioNodes();
   currentAudioGroup = null;
   updateAudioForScene(currentIndex);
 };
@@ -200,6 +269,7 @@ const dismissOverlay = () => {
   }
   entryOverlay.classList.add('is-hidden');
   hasUserInteracted = true;
+  initShoreAudioNodes();
   currentAudioGroup = null;
   updateAudioForScene(currentIndex);
 };
@@ -276,27 +346,14 @@ window.addEventListener('resize', () => {
   }
 });
 
-const faqBox = document.getElementById('faqBox');
-
-if (faqBox) {
-  faqBox.addEventListener('click', (event) => {
-    if (!faqBox.classList.contains('is-expanded')) {
-      faqBox.classList.add('is-expanded');
-    } else if (event.target.closest('h2')) {
-      faqBox.classList.remove('is-expanded');
-    }
-  });
-
-  document.addEventListener('click', (event) => {
-    if (faqBox.classList.contains('is-expanded') && !event.target.closest('#faqBox')) {
-      faqBox.classList.remove('is-expanded');
-    }
-  });
-}
-
 window.addEventListener('wheel', (event) => {
-  if (faqBox?.classList.contains('is-expanded') && event.target.closest('#faqBox')) {
-    return;
+  const faqScroll = event.target.closest('.faq-scroll-container');
+  if (faqScroll && faqScroll.scrollHeight > faqScroll.clientHeight) {
+    const atTop = faqScroll.scrollTop <= 0 && event.deltaY < 0;
+    const atBottom = faqScroll.scrollTop + faqScroll.clientHeight >= faqScroll.scrollHeight - 1 && event.deltaY > 0;
+    if (!atTop && !atBottom) {
+      return;
+    }
   }
 
   event.preventDefault();
@@ -318,12 +375,6 @@ window.addEventListener('wheel', (event) => {
 }, { passive: false });
 
 window.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && faqBox?.classList.contains('is-expanded')) {
-    event.preventDefault();
-    faqBox.classList.remove('is-expanded');
-    return;
-  }
-
   if (['input', 'textarea', 'select'].includes(event.target.tagName?.toLowerCase())) {
     return;
   }
@@ -358,18 +409,34 @@ window.addEventListener('touchstart', (event) => {
 }, { passive: true });
 
 window.addEventListener('touchend', (event) => {
-  if (faqBox?.classList.contains('is-expanded') && event.target.closest('#faqBox')) {
-    return;
+  const faqScroll = event.target.closest('.faq-scroll-container');
+  if (faqScroll && faqScroll.scrollHeight > faqScroll.clientHeight) {
+    const deltaY = touchStartY - event.changedTouches[0].clientY;
+    const atTop = faqScroll.scrollTop <= 0 && deltaY < 0;
+    const atBottom = faqScroll.scrollTop + faqScroll.clientHeight >= faqScroll.scrollHeight - 1 && deltaY > 0;
+    if (!atTop && !atBottom) {
+      return;
+    }
   }
 
   const deltaX = touchStartX - event.changedTouches[0].clientX;
   const deltaY = touchStartY - event.changedTouches[0].clientY;
 
-  if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
-    if (deltaX > 0) {
-      goToScene(currentIndex + 1);
-    } else {
-      goToScene(currentIndex - 1);
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (Math.abs(deltaX) > 35) {
+      if (deltaX > 0) {
+        goToScene(currentIndex + 1);
+      } else {
+        goToScene(currentIndex - 1);
+      }
+    }
+  } else {
+    if (Math.abs(deltaY) > 45) {
+      if (deltaY > 0) {
+        goToScene(currentIndex + 1);
+      } else {
+        goToScene(currentIndex - 1);
+      }
     }
   }
 }, { passive: true });

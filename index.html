@@ -44,25 +44,30 @@
         <span class="top-nav-sep" aria-hidden="true">|</span>
         <a href="https://hackclub.com/privacy-and-terms#hack-club-privacy-notice" target="_blank" rel="noopener noreferrer">Privacy</a>
         <span class="top-nav-sep" aria-hidden="true">|</span>
-        <a href="https://security.hackclub.com/" target="_blank" rel="noopener noreferrer">Security Bounty</a>
-        <span class="top-nav-sep" aria-hidden="true">|</span>
-        <button class="audio-toggle-btn" id="audioToggleBtn" type="button" aria-label="Mute ambient audio" title="Toggle audio (M)">
-          <svg class="audio-icon audio-icon-unmuted" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-          </svg>
-          <svg class="audio-icon audio-icon-muted" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-          </svg>
-          <span class="audio-toggle-text" id="audioToggleText">Mute</span>
-        </button>
+        <a href="https://github.com/hackclub/hackclub/blob/main/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer">Code of Conduct</a>
       </nav>
     </header>
+
+    <div class="hero-nav">
+      <div class="hero-nav-left"></div>
+      <div class="hero-nav-right">
+        <button type="button" class="audio-toggle-btn is-muted" id="audioToggleBtn" aria-label="Unmute ambient audio">
+          <svg class="audio-icon audio-icon-unmuted" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+          </svg>
+          <svg class="audio-icon audio-icon-muted" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" fill="currentColor"/>
+          </svg>
+          <span id="audioToggleText">Unmute</span>
+        </button>
+      </div>
+    </div>
 
     <section>
       <div class="content-box">
         <h1>Chronicles</h1>
-        <p>A Hack Club YSWS where you ship your own narrative game, and get AWESOME rewards!</p>
-        <p class="sponsor-credit">Sponsored by <a href="https://app.slack.com/client/E09V59WQY1E/D0C94HDHZ4H" target="_blank" rel="noopener noreferrer">@David</a> and <a href="https://app.slack.com/client/E09V59WQY1E/D0CCMEWPDS7" target="_blank" rel="noopener noreferrer">@ren</a> | Org @CreatorPoints</p>
+        <p>A small journey can make a big difference.</p>
+        <p class="scroll-instruction">Scroll to begin your adventure &rarr;</p>
       </div>
     </section>
 
@@ -74,42 +79,143 @@
     </section>
 
     <section>
-      <div class="content-box">
-        <h2>What's there in the village?</h2>
-        <p>When you reach the village, your story is told all over the village, and villagers reward your valiant stories with rewards like</p>
-        <ul class="village-list">
-          <li><span class="village-item-title">Steam Developer Grant</span> &mdash; To list your awesome game on Steam!</li>
-          <li><span class="village-item-title">Indie games</span> &mdash; Games that make you awe in shock</li>
-          <li><span class="village-item-title">Drawing Tab Grant</span> &mdash; Draw better characters :3</li>
-        </ul>
-        <p class="village-footer">And much more!</p>
+      <div class="village-showcase">
+        <aside class="floating-flank flank-left" aria-label="Village reward items left">
+          <div class="floating-card card-item-1">
+            <div class="floating-card-img-wrap">
+              <img src="assets/shop/stickers.png" alt="Stickers" class="floating-card-img" loading="lazy">
+            </div>
+            <span class="floating-card-name">Stickers</span>
+          </div>
+          <div class="floating-card card-item-2">
+            <div class="floating-card-img-wrap">
+              <img src="assets/shop/steam-grant.png" alt="Steam Developer Grant" class="floating-card-img" loading="lazy">
+            </div>
+            <span class="floating-card-name">Steam Grant</span>
+          </div>
+          <div class="floating-card card-item-3">
+            <div class="floating-card-img-wrap">
+              <img src="assets/shop/themed-games.svg" alt="Chosen catalogue of themed games" class="floating-card-img" loading="lazy">
+            </div>
+            <span class="floating-card-name">Themed Games</span>
+          </div>
+          <div class="floating-card card-item-4">
+            <div class="floating-card-img-wrap">
+              <img src="assets/shop/art-software.png" alt="License to Art Softwares" class="floating-card-img" loading="lazy">
+            </div>
+            <span class="floating-card-name">Art Software</span>
+          </div>
+        </aside>
+
+        <div class="content-box">
+          <h2>What's there in the village?</h2>
+          <p>When you reach the village, your story is told all over the village, and villagers reward your valiant stories with rewards like</p>
+          <ul class="village-list">
+            <li><span class="village-item-title">Steam Developer Grant</span> &mdash; List your awesome game on Steam!</li>
+            <li><span class="village-item-title">Drawing Tablets</span> &mdash; Wacom Intuos S, XP-Pen Deco Mini7 & Wacom One</li>
+            <li><span class="village-item-title">Software Licenses</span> &mdash; Art software and FL Studio licenses</li>
+            <li><span class="village-item-title">Games & Stickers</span> &mdash; Themed game catalogue and official stickers</li>
+          </ul>
+          <div class="village-fallback-grid">
+            <div class="floating-card">
+              <div class="floating-card-img-wrap">
+                <img src="assets/shop/stickers.png" alt="Stickers" class="floating-card-img" loading="lazy">
+              </div>
+              <span class="floating-card-name">Stickers</span>
+            </div>
+            <div class="floating-card">
+              <div class="floating-card-img-wrap">
+                <img src="assets/shop/steam-grant.png" alt="Steam Developer Grant" class="floating-card-img" loading="lazy">
+              </div>
+              <span class="floating-card-name">Steam Grant</span>
+            </div>
+            <div class="floating-card">
+              <div class="floating-card-img-wrap">
+                <img src="assets/shop/themed-games.svg" alt="Chosen catalogue of themed games" class="floating-card-img" loading="lazy">
+              </div>
+              <span class="floating-card-name">Themed Games</span>
+            </div>
+            <div class="floating-card">
+              <div class="floating-card-img-wrap">
+                <img src="assets/shop/art-software.png" alt="License to Art Softwares" class="floating-card-img" loading="lazy">
+              </div>
+              <span class="floating-card-name">Art Software</span>
+            </div>
+            <div class="floating-card">
+              <div class="floating-card-img-wrap">
+                <img src="assets/shop/wacom-intuos-s.jpg" alt="Wacom Intuos S" class="floating-card-img" loading="lazy">
+              </div>
+              <span class="floating-card-name">Wacom Intuos S</span>
+            </div>
+            <div class="floating-card">
+              <div class="floating-card-img-wrap">
+                <img src="assets/shop/xppen-deco-mini7.jpg" alt="XP-Pen Deco Mini7" class="floating-card-img" loading="lazy">
+              </div>
+              <span class="floating-card-name">XP-Pen Mini7</span>
+            </div>
+            <div class="floating-card">
+              <div class="floating-card-img-wrap">
+                <img src="assets/shop/wacom-one.jpg" alt="Wacom One" class="floating-card-img" loading="lazy">
+              </div>
+              <span class="floating-card-name">Wacom One</span>
+            </div>
+            <div class="floating-card">
+              <div class="floating-card-img-wrap">
+                <img src="assets/shop/fl-studio.png" alt="FL Studio License" class="floating-card-img" loading="lazy">
+              </div>
+              <span class="floating-card-name">FL Studio</span>
+            </div>
+          </div>
+          <p class="village-footer">And much more!</p>
+        </div>
+
+        <aside class="floating-flank flank-right" aria-label="Village reward items right">
+          <div class="floating-card card-item-5">
+            <div class="floating-card-img-wrap">
+              <img src="assets/shop/wacom-intuos-s.jpg" alt="Wacom Intuos S" class="floating-card-img" loading="lazy">
+            </div>
+            <span class="floating-card-name">Wacom Intuos S</span>
+          </div>
+          <div class="floating-card card-item-6">
+            <div class="floating-card-img-wrap">
+              <img src="assets/shop/xppen-deco-mini7.jpg" alt="XP-Pen Deco Mini7" class="floating-card-img" loading="lazy">
+            </div>
+            <span class="floating-card-name">XP-Pen Mini7</span>
+          </div>
+          <div class="floating-card card-item-7">
+            <div class="floating-card-img-wrap">
+              <img src="assets/shop/wacom-one.jpg" alt="Wacom One" class="floating-card-img" loading="lazy">
+            </div>
+            <span class="floating-card-name">Wacom One</span>
+          </div>
+          <div class="floating-card card-item-8">
+            <div class="floating-card-img-wrap">
+              <img src="assets/shop/fl-studio.png" alt="FL Studio License" class="floating-card-img" loading="lazy">
+            </div>
+            <span class="floating-card-name">FL Studio</span>
+          </div>
+        </aside>
       </div>
     </section>
 
     <section>
       <div class="content-box faq-box" id="faqBox">
-        <div class="faq-collapsed-view">
-          <h2>FAQ</h2>
-          <p>This box is not enough to fill all your answers ;) | Press me!</p>
-        </div>
-        <div class="faq-expanded-view">
-          <h2>Frequently Asked Questions</h2>
-          <div class="faq-scroll-container">
-            <h3>Whats Hack Club?</h3>
-            <p>Hack Club is a 501(c)(3) nonprofit organisation that empowers teenagers aged 13–18 to learn programming, engineering, and technology through hands-on projects, hackathons, and community-driven initiatives. It provides resources, mentorship, and opportunities for young creators to turn their ideas into real-world projects. </p>
-	    
-            <h3>Is this free?</h3>
-            <p>Yes! Its fully free, join now and earn awesome prizes!</p>
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-scroll-container">
+          <h3>Whats Hack Club?</h3>
+          <p>Hack Club is a 501(c)(3) nonprofit organisation that empowers teenagers aged 13–18 to learn programming, engineering, and technology through hands-on projects, hackathons, and community-driven initiatives. It provides resources, mentorship, and opportunities for young creators to turn their ideas into real-world projects.</p>
+          
+          <h3>Is this free?</h3>
+          <p>Yes! Its fully free, join now and earn awesome prizes!</p>
 
-			<h3>When will this YSWS start?</h3>
-			<p>It will start on <u>18th March 2027</u></p>
-            
-            <h3>How long will this YSWS last?</h3>
-            <p>Its still TBD... but it would not end before March 2027.</p>
-            
-            <h3>Whats 'Frames'?</h3>
-            <p>'Frames' is the currency of this YSWS. 10 Frames = $1</p>
-          </div>
+          <h3>When will this YSWS start?</h3>
+          <p>It will start on <u>18th March 2027</u></p>
+          
+          <h3>How long will this YSWS last?</h3>
+          <p>Its still TBD... but it would not end before March 2027.</p>
+          
+          <h3>Whats 'Frames'?</h3>
+          <p>'Frames' is the currency of this YSWS. 10 Frames = $1</p>
         </div>
       </div>
     </section>
@@ -128,7 +234,7 @@
         <h2>The pen is yours now</h2>
         <p>This was the story of the ysws, now its upon you to craft your own for your game!</p>
       </div>
-      <a class="hero-cta-btn" id="heroCtaBtn" href="https://gametale-vault.hackclub.app/auth/login">Join Now! (No you can't for now)</a>
+      <a class="hero-cta-btn" id="heroCtaBtn" href="https://chronicles-auth.k.hackclub.dev/auth/login">Join Now!</a>
     </section>
 
     <div class="scroll-pill" aria-hidden="true">
@@ -139,4 +245,3 @@
     <script src="js/app.js" defer></script>
   </body>
 </html>
-
