@@ -1,2 +1,6 @@
 # Chronicles
-A YSWS where you ship a 🔥 narrative game with oscar worthy story, and I [ @CreatorPoints ] will do a livestream on YouTube and Twitch playing some chosen top games!
+While I and my friends were discussing about how sick the games back in 2011 were, like Portal 2 and Red Dead Redemption 2, I realized something...
+> _Games now don't hit that hard_
+
+I am gonna CHANGE that!
+Hence...
